@@ -1,0 +1,203 @@
+ 1  history
+    2  docker -v
+    3  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+    4  sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+    5      sudo yum -y install docker-ce
+    6  sudo yum -y install epel-release
+    7  sudo yum -y install docker-compose
+    8  docker pull mysql:5.7
+    9  docker -v
+   10  docker pull mysql:5.7
+   11  docker
+   12  cd /
+   13  ls
+   14  docker pull mysql:5.7
+   15  sudo systemctl start docker
+   16  sudo systemctl enable docker
+   17  docker-compose -v
+   18   docker pull mysql:5.7
+   19  docker ps
+   20  docker images
+   21  cd /
+   22  ls
+   23  mkdir /cps
+   24  mkdir /cps/data
+   25  mkdir /cps/data/asb
+   26  cd /opt
+   27  ll
+   28  scp root@172.20.10.147:/opt/imgaes/asb/docker-compose-asb_cluster1.yml /opt
+   29  ls
+   30  mv docker-compose-asb_cluster1.yml docker-compose-asb-mysql.yml
+   31  cat docker-compose-asb-mysql.yml
+   32  vi /opt/docker-compose-asb-mysql.yml
+   33  docker-compose -f /opt/docker-compose-asb-mysql.yml up -d
+   34  docker network create cps-network
+   35  cat docker-compose-asb-mysql.yml
+   36  docker images
+   37  cd /
+   38  ls
+   39  unzip data-db.zip
+   40  ls
+   41  mv data-db data
+   42  ls
+   43  cd data
+   44  ls
+   45  cat docker-compose-mdm.yml
+   46  docker-compose -p smdm -f /data/docker-compose-mdm.yml up -d
+   47  docker ps
+   48  docker images
+   49  docker ps
+   50  cd /data/mysql5/db
+   51  ls
+   52  cd /
+   53  ls
+   54  rm -rf data
+   55  unzip data-db.zip
+   56  ls
+   57  docker ps
+   58  docker rm -f 7eed4f4f0fff
+   59  ls
+   60  mv data-db data
+   61  rm -rf data-db.zip
+   62  ls
+   63  cd data/
+   64  ls
+   65  cd cat docker-compose-mdm.yml
+   66  cat docker-compose-mdm.yml
+   67  docker-compose -p smdm -f /data/docker-compose-mdm.yml up -d
+   68  history
+
+
+1  history
+    2  cd /
+    3  ls
+    4  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+    5  sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+    6  sudo yum -y install docker-ce
+    7  sudo systemctl start docker
+    8  sudo systemctl enable docker
+    9  sudo yum -y install epel-release
+   10  sudo yum -y install docker-compose
+   11  docker-compose -v
+   12  cd /
+   13  ls
+   14  ping www.baidu.com
+   15  ps -ef|grep ping
+   16  kill -9 2255
+   17  docker
+   18  sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+   19  sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+   20   sudo yum -y install docker-ce
+   21  docker -v
+   22  docker -v
+   23  docker -V
+   24  docker -v
+   25  docker imgaes
+   26  docker images
+   27  docker pull tomcat:9
+   28  docker pull mysql:5.7
+   29  cd /
+   30  ls
+   31  cd /
+   32  ls
+   33  docker images
+   34  ping 172.20.10.206
+   35  ls
+   36  cd /
+   37  ls
+   38  unzip data.zip
+   39  ls
+   40  cd data
+   41  ls
+   42  cat docker-compose-mdm.yml
+   43  vim docker-compose-mdm.yml
+   44  cat docker-compose-mdm.yml
+   45   docker-compose -p smdm -f /data/docker-compose-mdm.yml up -d
+   46  docker images
+   47  docker rm -f 11d8667108c2
+   48  docker rm  11d8667108c2
+   49  docker rm -f  mysql:5.7
+   50  docker rm mysql:5.7
+   51  docker ps
+   52  docker logs 63a07a0b7ed0
+   53  cd /
+   54  ls
+   55  cd data
+   56  ls
+   57  cd mdm/
+   58  ls
+   59  cd log/
+   60  ls
+   61  cat app.log
+   62  docker ps
+   63  docker restart 63a07a0b7ed0
+   64  docker ps
+   65  ls
+   66  cat  app.log
+   67  docker ps
+   68  docker stop 63a07a0b7ed0
+   69  docker start 63a07a0b7ed0
+   70  docker ps
+   71  docker logs 63a07a0b7ed0
+   72  ls
+   73  cat app.log
+   74  tail -f app.log
+   75  docker ps
+   76  docker restart 63a07a0b7ed0
+   77  docker images
+   78  docker ps
+   79  docker rm -f 63a07a0b7ed0
+   80  docker images
+   81  docker rmi -f  11d8667108c2
+   82  docker-compose -p smdm -f /data/docker-compose-mdm.yml up -d
+   83  docker images
+   84  docker ps
+   85  cd /data
+   86  ls
+   87  cd mdm/
+   88  ls
+   89  cd war/
+   90  ls
+   91  cd ROOT/
+   92  ls
+   93  ../
+   94  l
+   95  cd ../
+   96  ls
+   97  cd ../
+   98  ls
+   99  cd log/
+  100  ls
+  101  cat app.log
+  102  cd /
+  103  ls
+  104  cd data
+  105  ls
+  106  cd mdm/
+  107  ls
+  108  cd war/
+  109  ls
+  110  cd ROOT/
+  111  LS
+  112  ls
+  113  cd WEB-INF/
+  114  ls
+  115  cd classes/
+  116  ls
+  117  cd config/
+  118  ls
+  119  docker ps
+  120  docker restart 223338b669ae
+  121  cd /
+  122  ls
+  123  rm -rf data.zip
+  124  ls
+  125  cd opt/
+  126  ls
+  127  cd /
+  128  ;s
+  129  ls
+  130  cd /
+  131  ls
+  132  history
+
