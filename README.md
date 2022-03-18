@@ -46,7 +46,7 @@ docker load -i minio.tar
 docker run -d --name=minio -p 9000:9000 -v /mnt/data:/data --restart=always -e "MINIO_ROOT_USER=root" -e "MINIO_ROOT_PASSWORD=xxxxxx" minio/minio server /data
 
 docker run -itd --name redis -p 6379:6379 --restart=always redis --requirepass "xxxxx2021"
-二 安装docker-compose
+# 二 安装docker-compose
 
 下载：
 
