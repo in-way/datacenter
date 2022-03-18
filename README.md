@@ -46,4 +46,20 @@ docker load -i minio.tar
 docker run -d --name=minio -p 9000:9000 -v /mnt/data:/data --restart=always -e "MINIO_ROOT_USER=root" -e "MINIO_ROOT_PASSWORD=xxxxxx" minio/minio server /data
 
 docker run -itd --name redis -p 6379:6379 --restart=always redis --requirepass "xxxxx2021"
+二 安装docker-compose
 
+下载：
+
+ curl -L https://get.daocloud.io/docker/compose/releases/download/1.25.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+1
+修改权限：
+
+chmod +x /usr/local/bin/docker-compose
+
+查看是否安装成功：
+
+docker-compose -version
+
+curl -L https://get.daocloud.io/docker/compose/releases/download/1.25.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+
+参考 https://blog.csdn.net/qq_38414907/article/details/122607403
