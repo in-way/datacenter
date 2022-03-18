@@ -63,3 +63,50 @@ docker-compose -version
 curl -L https://get.daocloud.io/docker/compose/releases/download/1.25.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 
 参考 https://blog.csdn.net/qq_38414907/article/details/122607403
+
+
+# 在线安装 docker
+一、安装docker-ce
+从镜像仓库安装：
+
+更新yum包：
+
+sudo yum update
+
+设置镜像仓库：
+sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+更新yum索引：
+
+sudo yum makecache fast
+
+安装最新docker-ce:
+
+sudo yum install docker-ce
+
+启动/停止 docker：
+
+sudo systemctl start docker 启动
+sudo systemctl restart docker 重启
+sudo systemctl enable docker 加入开机启动
+
+卸载docker：
+
+sudo yum remove docker-ce
+
+二、安装docker-compose
+github上下载太慢，使用国内镜像
+
+下载：
+
+ curl -L https://get.daocloud.io/docker/compose/releases/download/1.25.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+1
+修改权限：
+
+chmod +x /usr/local/bin/docker-compose
+
+查看是否安装成功：
+
+docker-compose -version
+
+原文链接：https://blog.csdn.net/qq_38414907/article/details/122607403
