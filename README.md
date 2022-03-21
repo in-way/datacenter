@@ -110,3 +110,128 @@ chmod +x /usr/local/bin/docker-compose
 docker-compose -version
 
 原文链接：https://blog.csdn.net/qq_38414907/article/details/122607403
+
+# K8S+DOCKER
+#修改主机名
+vim /etc/hostname 
+reboot
+history
+#关闭防火墙
+systemctl disable firewalld
+systemctl status firewalld
+systemctl stop firewalld
+systemctl status firewalld
+dnf journalctl -xe
+#修改仓库地址
+sed -e 's|^mirrorlist=|#mirrorlist=|g'     -e 's|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.aliyun.com/rockylinux|g'     -i.bak     /etc/yum.repos.d/Rocky-*.repo
+#重置缓存
+dnf makecache
+dnf install libseccomp-devel.x86_64 -y
+#go安装
+dnf install go
+go version
+#runc安装
+mkdir /opt/opencontainers
+cd /opt/opencontainers
+git clone https://github.com/opencontainers/runc
+cd runc/
+make
+dnf -y install gcc gcc-c++ automake autoconf libtool make
+runc -v
+#containerd安装
+wget -P /opt/downloads https://download.fastgit.org/containerd/containerd/releases/download/v1.5.8/cri-containerd-cni-1.5.8-linux-amd64.tar.gz
+tar -tf /opt/downloads/cri-containerd-cni-1.5.8-linux-amd64.tar.gz
+cd /
+tar -C / -xzf /opt/downloads/cri-containerd-cni-1.5.8-linux-amd64.tar.gz
+vim ~/.bashrc
+source ~/.bashrc
+mkdir /etc/containerd
+containerd config default > /etc/containerd/config.toml
+systemctl enable containerd
+systemctl restart containerd
+systemctl status containerd
+journalctl -xe
+ctr version
+ctr namespace ls
+wget -P /opt/downloads https://github.com/moby/buildkit/releases/download/v0.9.3/buildkit-v0.9.3.linux-amd64.tar.gz
+nerdctl build
+wget https://github.com/moby/buildkit/releases/download/v0.9.2/buildkit-v0.9.2.linux-amd64.tar.gz
+reboot
+wget -P /opt/downloads https://github.com/moby/buildkit/releases/download/v0.9.3/buildkit-v0.9.3.linux-amd64.tar.gz
+cd /opt/downloads/
+date
+dnf install -y chrony
+systemctl enable --now chronyd
+rm -rf /etc/localtime
+ln -s /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
+date
+mkdir /etc/buildkit/
+dnf install -y nfs-utils rpcbind
+rpm -qa nfs-utils rpcbind
+mkdir -p /k8s-volume;chmod -R 755 /k8s-volume
+lsblk
+echo “vm.swappiness = 0”>> /etc/sysctl.conf 
+swapoff -a && swapon -a
+sysctl -p
+wget -c https://sealyun.oss-cn-beijing.aliyuncs.com/latest/sealos && chmod +x sealos && mv sealos /usr/bin
+cd /root/
+wget -c https://sealyun.oss-cn-beijing.aliyuncs.com/05a3db657821277f5f3b92d834bbaf98-v1.22.0/kube1.22.0.tar.gz
+sealos init --master 192.168.1.32 --master 192.168.1.35 --user root  --passwd '123456' --pkg-url /root/kube1.22.0.tar.gz --version v1.22.0
+kubectl get pod -A
+kubectl get nodes
+clear
+kubectl taint nodes --all node-role.kubernetes.io/master-
+#此处一共修改两个地方：
+	1.- --feature-gates=TTLAfterFinished=true,RemoveSelfLink=false       //动态PV关键属性
+	2.添加：- --service-node-port-range=1-65535			     //监听应用端口
+vim /etc/kubernetes/manifests/kube-apiserver.yaml
+
+
+
+
+systemctl daemon-reload
+systemctl restart kubelet
+systemctl status kubelet
+kubectl get nodes
+dnf install -y nfs-utils rpcbind
+chmod -R 755 /k8s-volume
+ifconfig
+vim /etc/exports                             //此处修改为自己的nfs服务器
+systemctl restart rpcbind
+systemctl restart nfs-server
+systemctl enable rpcbind
+systemctl enable nfs-server
+exportfs -v
+ctr i pull quay.io/external_storage/nfs-client-provisioner:v3.1.0-k8s1.11
+vim /opt/nfs-client-provisioner/deploy.yaml 
+kubectl apply -f /opt/nfs-client-provisioner/deploy.yaml 
+showmount -e
+kubectl apply -f /opt/nfs-client-provisioner/deploy.yaml 
+kubectl get pod -A 
+kubectl describe pod -n nfs nfs-client-provisioner-b5d7d5fc9-h9nkh
+kubectl get pod -A 
+ctr i pull docker.io/library/mysql:8.0.27
+vim /opt/mysql/deploy.yaml 
+kubectl apply -f /opt/mysql/deploy.yaml 
+kubectl get pod -A 
+kubectl describe pod -n mysql mysql-0
+kubectl describe pods
+kubectl get pv
+kubectl get pod -A
+kubectl exec -it -n mysql mysql-0 -- bash
+kubectl get pod -A
+kubectl describe pod -n  mysql mysql-0
+ctr i pull docker.io/library/redis:6.2.5-buster
+kubectl apply -f /opt/redis/deploy.yaml 
+kubectl get pod -A
+kubectl apply -f /opt/redis/deploy.yaml 
+kubectl get pod -A
+kubectl exec -it -n mysql mysql-0 -- bash
+history
+#nacos部署前，请先部署MySQL
+#nacos deploy.yaml 数据源需修改为自己的数据源
+ctr i pull docker.io/nacos/nacos-server:2.0.3-slim
+ctr i pull docker.io/nacos/nacos-peer-finder-plugin:1.1
+kubectl apply -f /opt/nacos/deploy3.yaml
+kubectl get pod --all-namespaces
+
